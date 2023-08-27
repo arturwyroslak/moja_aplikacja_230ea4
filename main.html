@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatBot</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .chat-container {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-y: auto;
+            background-color: #f0f0f0;
+        }
+
+        .message {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-message {
+            background-color: #defcff;
+            align-self: flex-start;
+        }
+
+        .bot-message {
+            background-color: #eaf8ff;
+            align-self: flex-end;
+        }
+        
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .input-field {
+            flex-grow: 1;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        .send-button {
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chat-container">
+        <div class="message bot-message">
+            <p>Hello, how can I help you today?</p>
+        </div>
+    </div>
+    <div class="input-container">
+        <input type="text" class="input-field" id="input-field" placeholder="Type your message...">
+        <button class="send-button" id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const inputField = document.getElementById('input-field');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', sendMessage);
+
+        function sendMessage() {
+            const userMessage = inputField.value;
+            const userMessageElement = createMessageElement(userMessage, 'user-message');
+            chatContainer.appendChild(userMessageElement);
+            inputField.value = '';
+
+            // Simulate bot response delay
+            setTimeout(() => {
+                const botMessage = 'Here is the response from the chatbot.';
+                const botMessageElement = createMessageElement(botMessage, 'bot-message');
+                chatContainer.appendChild(botMessageElement);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+
+        function createMessageElement(message, className) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', className);
+            messageElement.innerHTML = `<p>${message}</p>`;
+            return messageElement;
+        }
+    </script>
+</body>
+</html>
